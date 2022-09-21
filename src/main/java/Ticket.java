@@ -17,7 +17,8 @@ public class Ticket implements Comparable<Ticket> {
         this.arrivalAirport = arrivalAirport;
         this.travelTime = travelTime;
     }
-//
+
+    //
 //    public Ticket() {
 //    }
 //
@@ -53,9 +54,9 @@ public class Ticket implements Comparable<Ticket> {
 //        this.arrivalAirport = arrivalAirport;
 //    }
 //
-//    public int getTravelTime() {
-//        return travelTime;
-//    }
+    public int getTravelTime() {
+        return travelTime;
+    }
 //
 //    public void setTravelTime(int travelTime) {
 //        this.travelTime = travelTime;

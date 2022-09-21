@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class TicketManager {
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
@@ -40,9 +43,33 @@ public class TicketManager {
         for (int i = 0; i < getAllTickets().length; i++) {
             if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
                 result[iCount] = tickets[i];
-                iCount ++;
+                iCount++;
             }
         }
+        return result;
+    }
+
+
+    // новый поиск через Comparator
+    public Ticket[] findAllComparator(String from, String to, Comparator<Ticket> comparator) {
+        Ticket[] tickets = getAllTickets();
+        int count = 0;
+        // подсчет размерности массива tmp (согласно условию)
+        for (int i = 0; i < getAllTickets().length; i++) {
+            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+                count++;
+            }
+        }
+        // сборка массива tmp размером count
+        Ticket[] result = new Ticket[count];
+        int iCount = 0;
+        for (int i = 0; i < getAllTickets().length; i++) {
+            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+                result[iCount] = tickets[i];
+                iCount++;
+            }
+        }
+        Arrays.sort(result, comparator);
         return result;
     }
 }
