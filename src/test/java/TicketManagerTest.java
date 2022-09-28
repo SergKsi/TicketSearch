@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TicketManagerTest {
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
@@ -30,132 +28,63 @@ public class TicketManagerTest {
     public void testGetAllElements() {
         Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket5};
         Ticket[] actual = manager.getAllTickets();
-
         Assertions.assertArrayEquals(expected, actual);
     }
 
     // добавление билета в репозиторий
     @Test
     public void testAddTicket() {
-        Ticket ticket6 = new Ticket(35, 23200, "DME", "KUF ", 450);
-
+        Ticket ticket6 = new Ticket(35, 23200, "DME", "KUF", 450);
         manager.add(ticket6);
         Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket5, ticket6};
         Ticket[] actual = manager.getAllTickets();
-
         Assertions.assertArrayEquals(expected, actual);
     }
 
     // удаление билета в репозиторий
     @Test
     public void testDelTicket() {
-//        Ticket ticket3 = new Ticket(13, 4200, "LED", "KUF ", 350);
         manager.del(13);
         Ticket[] expected = {ticket1, ticket2, ticket4, ticket5};
         Ticket[] actual = manager.getAllTickets();
-
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // 1 способ. Сортировка в порядке возрастания стоимости билета
+    // Сортировка в порядке возрастания стоимости билета
+    //  2 совпадения по рейсам. Второй больше первого
     @Test
-    public void testSortTickets() {
-        Ticket[] tickets = {ticket1, ticket2, ticket3, ticket4, ticket5};
-        Arrays.sort(tickets);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket5, ticket4};
-        Ticket[] actual = tickets;
+    public void testFindAirportSortTicketsFirst() {
+        Ticket ticket6 = new Ticket(35, 700, "EGO", "DME", 450);
+        manager.add(ticket6);
+        Ticket[] expected = {ticket6, ticket2};
+        Ticket[] actual = manager.findAll("EGO", "DME");
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // 2 способ. Сортировка в порядке возрастания стоимости билета
-    // через TicketCostComparator
+    // Сортировка в порядке возрастания стоимости билета
+    //  2 совпадения по рейсам.
     @Test
-    public void testSortTicketsComparator() {
-        TicketCostComparator costComparator = new TicketCostComparator();
-//        Ticket[] tickets = {ticket1, ticket2, ticket3, ticket4, ticket5};
-        Ticket[] tickets = manager.getAllTickets();
-        Arrays.sort(tickets, costComparator);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket5, ticket4};
-        Ticket[] actual = tickets;
+    public void testFindAirportSortTicketsSecond() {
+        Ticket ticket6 = new Ticket(35, 700, "OGZ", "EGO", 450);
+        Ticket ticket7 = new Ticket(39, 1500, "OGZ", "EGO", 400);
+        manager.add(ticket6);
+        manager.add(ticket7);
+        Ticket[] expected = {ticket6, ticket7, ticket4};
+        Ticket[] actual = manager.findAll("OGZ", "EGO");
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // 1 способ. Сортировка в порядке возрастания стоимости билета
+    // Сортировка в порядке возрастания стоимости билета
     // Стоимость билетов равна
     @Test
-    public void testSortTicketsEqual() {
-        Ticket ticket6 = new Ticket(96, 4200, "LED", "DEM", 355);
+    public void testFindAirportSortTicketsEqual() {
+        Ticket ticket6 = new Ticket(35, 900, "EGO", "DME", 450);
         manager.add(ticket6);
-        Ticket[] tickets = manager.getAllTickets();
-        Arrays.sort(tickets);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket6, ticket5, ticket4 };
-        Ticket[] actual = tickets;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // 2 способ. Сортировка в порядке возрастания стоимости билета
-    // через TicketCostComparator
-    // Стоимость билетов равна
-    @Test
-    public void testSortTicketsComparatorEqual() {
-        TicketCostComparator costComparator = new TicketCostComparator();
-        Ticket ticket6 = new Ticket(13, 4200, "LED", "KUF", 350);
-        manager.add(ticket6);
-        Ticket[] tickets = manager.getAllTickets();
-        Arrays.sort(tickets, costComparator);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket6, ticket5, ticket4};
-        Ticket[] actual = tickets;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // поиск по аэропорту вылета и аэропорту прилёта (даты не учитываем)
-    // + сортировка - результаты должны быть отсортированы по цене (от меньшей к большей).
-    // Одно совпадение
-    @Test
-    public void testFindAirportFromToSortOne() {
-        // Domodedovo = DME
-        TicketCostComparator costComparator = new TicketCostComparator();
-        Ticket[] expected = {ticket5};
-        //       Ticket[] tickets = manager.getAllTickets();
-        Ticket[] tmp = manager.findAll("DME", "FRU");
-        ;
-        Arrays.sort(tmp, costComparator);
-        Ticket[] actual = tmp;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // поиск по аэропорту вылета и аэропорту прилёта (даты не учитываем)
-    // + сортировка - результаты должны быть отсортированы по цене (от меньшей к большей).
-    // Несколько совпадений
-    @Test
-    public void testFindAirportFromToSortTwo() {
-//        Ticket ticket3 = new Ticket(13, 4200, "LED", "KUF", 350);
-        TicketCostComparator costComparator = new TicketCostComparator();
-        Ticket ticket6 = new Ticket(49, 3100, "LED", "KUF", 700);
-        manager.add(ticket6);
-        Ticket[] expected = {ticket6, ticket3};
-        //       Ticket[] tickets = manager.getAllTickets();
-        Ticket[] tmp = manager.findAll("LED", "KUF");
-        Arrays.sort(tmp, costComparator);
-        Ticket[] actual = tmp;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // поиск по аэропорту вылета и аэропорту прилёта (даты не учитываем)
-    // + сортировка - результаты должны быть отсортированы по цене (от меньшей к большей).
-    // НЕТ совпадений
-    @Test
-    public void testFindAirportFromToSortZero() {
-//        Ticket ticket3 = new Ticket(13, 4200, "LED", "KUF", 350);
-        TicketCostComparator costComparator = new TicketCostComparator();
-
-        Ticket[] expected = {};
-        //       Ticket[] tickets = manager.getAllTickets();
-        Ticket[] tmp = manager.findAll("LED", "EGO");
-        ;
-        Arrays.sort(tmp, costComparator);
-        Ticket[] actual = tmp;
+        Ticket[] expected = {ticket2, ticket6};
+        Ticket[] actual = manager.findAll("EGO", "DME");
         Assertions.assertArrayEquals(expected, actual);
     }
 
 }
+
+

@@ -1,12 +1,14 @@
+import java.util.Arrays;
+
 public class TicketManager {
+    private TicketRepository repo;
+
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
     }
 
     public TicketManager() {
     }
-
-    private TicketRepository repo;
 
     // добавить один билет в конец массива
     public void add(Ticket ticket) {
@@ -40,9 +42,10 @@ public class TicketManager {
         for (int i = 0; i < getAllTickets().length; i++) {
             if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
                 result[iCount] = tickets[i];
-                iCount ++;
+                iCount++;
             }
         }
+        Arrays.sort(result);
         return result;
     }
 }

@@ -50,28 +50,4 @@ public class TicketRepositoryTest {
         Ticket[] actual = repo.getTickets();
         Assertions.assertArrayEquals(expected, actual);
     }
-
-    // 1 способ. Сортировка в порядке возрастания стоимости билета
-    @Test
-    public void testSortTickets() {
-        Ticket[] tickets = {ticket1, ticket2, ticket3, ticket4, ticket5};
-        Arrays.sort(tickets);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket5, ticket4};
-        Ticket[] actual = tickets;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // 2 способ. Сортировка в порядке возрастания стоимости билета
-    // через TicketCostComparator
-    @Test
-    public void testSortTicketsComparator() {
-        TicketCostComparator costComparator = new TicketCostComparator();
-        Ticket[] tickets = {ticket1, ticket2, ticket3, ticket4, ticket5};
-        Arrays.sort(tickets, costComparator);
-        Ticket[] expected = {ticket2, ticket1, ticket3, ticket5, ticket4};
-        Ticket[] actual = tickets;
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-
 }

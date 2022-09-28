@@ -1,10 +1,6 @@
 public class Ticket implements Comparable<Ticket> {
-    //    id
-//    Стоимость (для упрощения будем считать стоимость единой для всех продавцов)
-//    Аэропорт вылета (вы можете использовать IATA-коды)
-//    Аэропорт прилёта (вы можете использовать IATA-коды)
-//    Время в пути (в минутах)
-    int id;
+
+    int id;      // id
     int cost; // Стоимость
     String departureAirport; // Аэропорт вылета = from
     String arrivalAirport; // Аэропорт прилёта = to
@@ -17,7 +13,8 @@ public class Ticket implements Comparable<Ticket> {
         this.arrivalAirport = arrivalAirport;
         this.travelTime = travelTime;
     }
-//
+
+    //
 //    public Ticket() {
 //    }
 //

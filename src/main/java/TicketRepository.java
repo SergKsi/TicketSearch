@@ -10,7 +10,7 @@ public class TicketRepository {
     // добавить один билет в конец массива
     public void save(Ticket ticket) {
         Ticket[] tmp = new Ticket[tickets.length + 1];
-        for (int i = 0; i < tickets.length; i ++) {
+        for (int i = 0; i < tickets.length; i++) {
             tmp[i] = tickets[i];
         }
         tmp[tmp.length - 1] = ticket; // в последнюю ячейку довабляем элемент ticket
@@ -24,7 +24,7 @@ public class TicketRepository {
         for (int i = 0; i < tickets.length; i++) {
             if (tickets[i].getId() != id) {
                 tmp[count] = tickets[i];
-                count ++;
+                count++;
             }
         }
         tickets = tmp;
@@ -34,5 +34,4 @@ public class TicketRepository {
     public Ticket[] getTickets() {
         return tickets;
     }
-
 }
