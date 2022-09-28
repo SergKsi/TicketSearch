@@ -6,8 +6,8 @@ public class TicketManager {
         this.repo = repo;
     }
 
-    public TicketManager() {
-    }
+//    public TicketManager() {
+//    }
 
     private TicketRepository repo;
 
@@ -26,32 +26,33 @@ public class TicketManager {
         return repo.getTickets();
     }
 
-    // поиск возвращает массив только с теми билетами, что соответствуют условиям поиска
-    // менеджера поиска по аэропорту вылета и аэропорту прилёта (даты не учитывайте)
-    public Ticket[] findAll(String from, String to) {
-        Ticket[] tickets = getAllTickets();
-        int count = 0;
-        // подсчет размерности массива tmp (согласно условию)
-        for (int i = 0; i < getAllTickets().length; i++) {
-            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
-                count++;
-            }
-        }
-        // сборка массива tmp размером count
-        Ticket[] result = new Ticket[count];
-        int iCount = 0;
-        for (int i = 0; i < getAllTickets().length; i++) {
-            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
-                result[iCount] = tickets[i];
-                iCount++;
-            }
-        }
-        return result;
-    }
+//    // поиск возвращает массив только с теми билетами, что соответствуют условиям поиска
+//    // менеджера поиска по аэропорту вылета и аэропорту прилёта (даты не учитывайте)
+//    public Ticket[] findAll(String from, String to) {
+//        Ticket[] tickets = getAllTickets();
+//        int count = 0;
+//        // подсчет размерности массива tmp (согласно условию)
+//        for (int i = 0; i < getAllTickets().length; i++) {
+//            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+//                count++;
+//            }
+//        }
+//        // сборка массива tmp размером count
+//        Ticket[] result = new Ticket[count];
+//        int iCount = 0;
+//        for (int i = 0; i < getAllTickets().length; i++) {
+//            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+//                result[iCount] = tickets[i];
+//                iCount++;
+//            }
+//        }
+//        Arrays.sort(result, comparator);
+//        return result;
+//    }
 
 
     // новый поиск через Comparator
-    public Ticket[] findAllComparator(String from, String to, Comparator<Ticket> comparator) {
+    public Ticket[] findAll(String from, String to, Comparator<Ticket> comparator) {
         Ticket[] tickets = getAllTickets();
         int count = 0;
         // подсчет размерности массива tmp (согласно условию)
