@@ -34,5 +34,4 @@ public class TicketRepository {
     public Ticket[] getTickets() {
         return tickets;
     }
-
 }
