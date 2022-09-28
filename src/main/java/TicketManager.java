@@ -1,8 +1,10 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     private TicketRepository repo;
 
+    TicketByTravelTimeAscComparator comparator = new TicketByTravelTimeAscComparator();
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
     }
