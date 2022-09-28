@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class TicketManagerTest {
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
@@ -38,11 +36,12 @@ public class TicketManagerTest {
     // добавление билета в репозиторий
     @Test
     public void testAddTicket() {
+
         Ticket ticket6 = new Ticket(35, 23200, "DME", "KUF ", 450);
+
         manager.add(ticket6);
         Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket5, ticket6};
         Ticket[] actual = manager.getAllTickets();
-
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -61,8 +60,10 @@ public class TicketManagerTest {
     public void testFindAirportSortTicketsFirst() {
         Ticket ticket6 = new Ticket(35, 700, "EGO", "DME", 450);
         manager.add(ticket6);
+
         Ticket[] expected = {ticket2, ticket6};
         Ticket[] actual = manager.findAll("EGO", "DME", comporator);
+
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -74,8 +75,10 @@ public class TicketManagerTest {
         Ticket ticket7 = new Ticket(39, 1500, "OGZ", "EGO", 400);
         manager.add(ticket6);
         manager.add(ticket7);
+
         Ticket[] expected = {ticket4, ticket7, ticket6};
         Ticket[] actual = manager.findAll("OGZ", "EGO", comporator);
+
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -86,8 +89,10 @@ public class TicketManagerTest {
         Ticket ticket6 = new Ticket(35, 900, "EGO", "DME", 450);
         manager.add(ticket6);
         Ticket[] expected = {ticket2, ticket6};
+
         Ticket[] actual = manager.findAll("EGO", "DME", comporator);
         Assertions.assertArrayEquals(expected, actual);
     }
 
 }
+

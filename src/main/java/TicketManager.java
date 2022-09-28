@@ -1,15 +1,14 @@
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class TicketManager {
+    private TicketRepository repo;
+
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
     }
 
 //    public TicketManager() {
 //    }
-
-    private TicketRepository repo;
 
     // добавить один билет в конец массива
     public void add(Ticket ticket) {
@@ -70,7 +69,9 @@ public class TicketManager {
                 iCount++;
             }
         }
+
         Arrays.sort(result, comparator);
+
         return result;
     }
 }
