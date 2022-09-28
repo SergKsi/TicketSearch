@@ -89,4 +89,5 @@ public class TicketManagerTest {
         Ticket[] actual = manager.findAll("EGO", "DME", comporator);
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }
