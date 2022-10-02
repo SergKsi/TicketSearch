@@ -85,6 +85,33 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // находится ровно один билет
+    @Test
+    public void testFindAirportSortTicketsOne() {
+        Ticket[] expected = {ticket2};
+        Ticket[] actual = manager.findAll("EGO", "DME");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // находится 0 билетов
+    @Test
+    public void testFindAirportSortTicketsZero() {
+        Ticket[] expected = {};
+        Ticket[] actual = manager.findAll("EGO", "OME");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // находится несколько билетов
+    @Test
+    public void testFindAirportSortTicketsSeveral() {
+        Ticket ticket6 = new Ticket(35, 210, "OGZ", "EGO", 150);
+        Ticket ticket7 = new Ticket(39, 300, "OGZ", "EGO", 200);
+        manager.add(ticket6);
+        manager.add(ticket7);
+        Ticket[] expected = {ticket6, ticket7, ticket4};
+        Ticket[] actual = manager.findAll("OGZ", "EGO");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
 
 
