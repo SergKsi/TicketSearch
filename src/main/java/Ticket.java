@@ -1,6 +1,5 @@
-public class Ticket implements Comparable<Ticket> {
-
-    int id;      // id
+public class Ticket {
+    int id;
     int cost; // Стоимость
     String departureAirport; // Аэропорт вылета = from
     String arrivalAirport; // Аэропорт прилёта = to
@@ -45,14 +44,15 @@ public class Ticket implements Comparable<Ticket> {
     public String getArrivalAirport() {
         return arrivalAirport;
     }
-//
+
+    //
 //    public void setArrivalAirport(String arrivalAirport) {
 //        this.arrivalAirport = arrivalAirport;
 //    }
 //
-//    public int getTravelTime() {
-//        return travelTime;
-//    }
+    public int getTravelTime() {
+        return travelTime;
+    }
 //
 //    public void setTravelTime(int travelTime) {
 //        this.travelTime = travelTime;
@@ -68,14 +68,14 @@ public class Ticket implements Comparable<Ticket> {
     // Дав верную реализацию этому методу вы научите джаву сравнивать объекты этого класса.
 
     // сортировка в порядке возрастания стоимости билета
-    @Override
-    public int compareTo(Ticket o) {
-        if (this.cost < o.cost) {
-            return -1;
-        } else {
-            if (this.cost > o.cost) {
-                return 1;
-            } else return 0;
-        }
-    }
+//    @Override
+//    public int compareTo(Ticket o) {
+//        if (this.cost < o.cost) {
+//            return -1;
+//        } else {
+//            if (this.cost > o.cost) {
+//                return 1;
+//            } else return 0;
+//        }
+//    }
 }

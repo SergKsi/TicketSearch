@@ -1,14 +1,16 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     private TicketRepository repo;
 
+    TicketByTravelTimeAscComparator comparator = new TicketByTravelTimeAscComparator();
     public TicketManager(TicketRepository repo) {
         this.repo = repo;
     }
 
-    public TicketManager() {
-    }
+//    public TicketManager() {
+//    }
 
     // добавить один билет в конец массива
     public void add(Ticket ticket) {
@@ -25,9 +27,33 @@ public class TicketManager {
         return repo.getTickets();
     }
 
-    // поиск возвращает массив только с теми билетами, что соответствуют условиям поиска
-    // менеджера поиска по аэропорту вылета и аэропорту прилёта (даты не учитывайте)
-    public Ticket[] findAll(String from, String to) {
+//    // поиск возвращает массив только с теми билетами, что соответствуют условиям поиска
+//    // менеджера поиска по аэропорту вылета и аэропорту прилёта (даты не учитывайте)
+//    public Ticket[] findAll(String from, String to) {
+//        Ticket[] tickets = getAllTickets();
+//        int count = 0;
+//        // подсчет размерности массива tmp (согласно условию)
+//        for (int i = 0; i < getAllTickets().length; i++) {
+//            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+//                count++;
+//            }
+//        }
+//        // сборка массива tmp размером count
+//        Ticket[] result = new Ticket[count];
+//        int iCount = 0;
+//        for (int i = 0; i < getAllTickets().length; i++) {
+//            if ((tickets[i].getDepartureAirport().equals(from)) & (tickets[i].getArrivalAirport().equals(to))) {
+//                result[iCount] = tickets[i];
+//                iCount++;
+//            }
+//        }
+//        Arrays.sort(result, comparator);
+//        return result;
+//    }
+
+
+    // новый поиск через Comparator
+    public Ticket[] findAll(String from, String to, Comparator<Ticket> comparator) {
         Ticket[] tickets = getAllTickets();
         int count = 0;
         // подсчет размерности массива tmp (согласно условию)
@@ -45,7 +71,9 @@ public class TicketManager {
                 iCount++;
             }
         }
-        Arrays.sort(result);
+
+        Arrays.sort(result, comparator);
+
         return result;
     }
 }
